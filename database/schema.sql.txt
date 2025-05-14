@@ -1,0 +1,61 @@
+CREATE TABLE Organization (
+    Organization_ID INT PRIMARY KEY,
+    Organization_name VARCHAR(255),
+    Email VARCHAR(255),
+    Address TEXT,
+    Password VARCHAR(255),
+    Image_URL TEXT
+);
+
+CREATE TABLE Organization_phone (
+    Organization_ID INT,
+    phone_number VARCHAR(20),
+    FOREIGN KEY (Organization_ID) REFERENCES Organization(Organization_ID)
+);
+
+CREATE TABLE Staff (
+    Staff_ID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Password VARCHAR(255),
+    Role VARCHAR(50)
+);
+
+CREATE TABLE Staff_phone (
+    Staff_ID INT,
+    phone_number VARCHAR(20),
+    FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID)
+);
+
+CREATE TABLE Donor (
+    User_ID INT PRIMARY KEY,
+    Email VARCHAR(255),
+    Status VARCHAR(50),
+    credit_card_number VARCHAR(20),
+    Password VARCHAR(255),
+    Firstname VARCHAR(100),
+    Lastname VARCHAR(100)
+);
+
+CREATE TABLE Donor_phone (
+    User_ID INT,
+    phone_number VARCHAR(20),
+    FOREIGN KEY (User_ID) REFERENCES Donor(User_ID)
+);
+
+CREATE TABLE Book (
+    ISBN VARCHAR(20) PRIMARY KEY,
+    Author_name VARCHAR(255),
+    publishing_year INT,
+    edition VARCHAR(50),
+    title VARCHAR(255),
+    number_of_available_copy INT,
+    Organization_ID INT,
+    FOREIGN KEY (Organization_ID) REFERENCES Organization(Organization_ID)
+);
+
+CREATE TABLE Donation_Package (
+    User_ID INT,
+    Donate_number VARCHAR(50),
+    Donate_amount DECIMAL(10,2),
+    FOREIGN KEY (User_ID) REFERENCES Donor(User_ID)
+);
